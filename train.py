@@ -216,8 +216,8 @@ def main():
     # Load checkpoint if exists
     start_epoch, start_loss = load_checkpoint(checkpoint_path, model, optimizer)
 
-    """ num epochs must be greater than the current epoch --> otherwise train.py will not run """
-    num_epochs = 25
+    user_epochs = int(input(f"Current epoch is {start_epoch}. How many more epochs do you want to train?"))
+    num_epochs = start_epoch + user_epochs  # Compute total epochs
 
     for epoch in range(start_epoch, num_epochs):
         for iter in range(max_iters):
