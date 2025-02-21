@@ -1,12 +1,12 @@
-# LLM-jh-GPT
+# LLM-multilang-GPT
 
-> Author(s): Henry Yost (henry-AY), Jessy Garcia (jgarc826)
+> Author(s): Henry Yost (henry-AY), Jessy Garcia (jgarc826), Dmitry Sorokin (Dekamayaro)
 
-A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the <a href="https://pytorch.org/docs/stable/nn.html"><ins>PyTorch.nn</a> (Neural network) library</ins> which houses transformer architecture. The goal of jhGPT is to output linguistic text similar to humans' capabilities. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forward to other languages. The majority and basis of the architecture come from Andrej Karpathy's <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> GitHub repo, however, all analyses, and text files are independent and licensed uniquely.
+A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the <a href="https://pytorch.org/docs/stable/nn.html"><ins>PyTorch.nn</a> (Neural network) library</ins> which houses transformer architecture. The goal of multilangGPT is to output linguistic text similar to humans' capabilities. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forward to other languages. The majority and basis of the architecture come from Andrej Karpathy's <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> GitHub repo, however, all analyses, and text files are independent and licensed uniquely.
 
-## Transformer Architecture used in jhGPT
+## Transformer Architecture used in multilangGPT
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Transformer.png?raw=true" width="400" height="675"/>
+  <img src="readme_files/Transformer.png" width="400" height="675"/>
 </p>
 
 The picture above is the transformer architecture as described and depicted in <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>. In essence, a transformer is a type of artificial intelligence model that learns and analyzes patterns in heaps of data to generate new output. Transformers are a current cutting-edge natural language processing (NLP) model relying on a different type of encoder-decoder architecture. Previous encoder-decoder architectures relied mainly on Recurrent Neural Networks (RNNs), however, Transformers can entirely remove said recurrence.
@@ -15,7 +15,7 @@ The picture above is the transformer architecture as described and depicted in <
 
 The figure below (the left half of the transformer) is the Encoder.
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Input_Transformer.png?raw=true" width="200" height="475"/>
+  <img src="readme_files/Input_Transformer.png" width="200" height="475"/>
 </p>
 
 #### Step 1 - Input Embeddings
@@ -40,18 +40,18 @@ $\ PE(\text{pos}, 2i + 1) = \cos \left( \frac{\text{pos}}{10000 \cdot \left( \fr
 PE\left(pos,\ 2i\ +\ 1\right)\ =\cos\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
 ```
 
-The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>.
+The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i>.
 
 #### Step 3 - Multi-Headed Self-Attention
 
-The encoder utilizes a specialized attention mechanism known as self-attention. Self-attention is how the model relates each word in the input with other words. This step differs for each model, as some are token, word, or character-based (jhGPT is a character-based encoder). 
+The encoder utilizes a specialized attention mechanism known as self-attention. Self-attention is how the model relates each word in the input with other words. This step differs for each model, as some are token, word, or character-based (multilangGPT is a character-based encoder). 
 
 This mechanism allows the encoder to concentrate on various parts of the input sequence while processing each token. Attention scores are calculated based on a query, key, and value concept (QKV). A QKV is analogous to a basic retrieval system that is most likely used in numerous websites you use daily.
 * <b>Query:</b> A vector that represents a token from the input sequence in the attention mechanism.
 * <b>Key:</b> A vector in the attention mechanism that corresponds to each token in the input sequence.
 * <b>Value:</b> Each value is associated with a given key, and where value where the query and key have the highest attention score is the final output.
 
-<i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i> will provide a significantly more detailed cover of the self-attention mechanism.
+<i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i> will provide a significantly more detailed cover of the self-attention mechanism.
 
 #### Step 4 - Output of the Encoder
 
@@ -61,7 +61,7 @@ The final encoder layer outputs a set of vectors, each representing a deep conte
 
 The figure below (the right half of the transformer) is the Decoder
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Decoder_Transformer.png?raw=true" width="200" height="675"/>
+  <img src="readme_files/Decoder_Transformer.png" width="200" height="675"/>
 </p>
 
 The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and softmax function to determine word probabilities.
@@ -81,10 +81,10 @@ After the embedding stage, the input is processed through a positional encoding 
 This process resembles the self-attention mechanism in the encoder, but with an important distinction: it restricts positions from attending to future positions. As a result, each word in the sequence remains uninfluenced by future tokens.
 
 <p align="center">
-  <img src="https://github.com/Hy8012/LLM-jh-GPT/blob/main/md_files/Masked_Scores.png?raw=true" width="650" height="200"/>
+  <img src="readme_files/Masked_Scores.png" width="650" height="200"/>
 </p>
 
-The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of jh-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
+The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
 
 #### Step 4 - Output of the Decoder
 
@@ -94,4 +94,9 @@ During operation, the decoder adds the newly generated output to its existing in
 
 ## References
 
-<a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> (Andrej Karpathy), <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>
+<a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> (Andrej Karpathy), <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>, <a href="https://www.gutenberg.org/"><i>Project Gutenberg</i></a>
+
+
+## Model Training Process
+
+[loss vs. epoch graph] <-- to be added soon.
