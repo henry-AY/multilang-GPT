@@ -97,6 +97,12 @@ During operation, the decoder adds the newly generated output to its existing in
 <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> (Andrej Karpathy), <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>, <a href="https://www.gutenberg.org/"><i>Project Gutenberg</i></a>
 
 
-## Model Training Process
+## Model Training Analysis
 
-[loss vs. epoch graph] <-- to be added soon.
+The training loss (red line) vs. validation loss (blue line) we can see are extremely similar graphs, however, the validation loss, in general, is smaller than the training loss, thus we are slightly underfitting. We will attempt to solve this by adding and training on more extensive data sets.
+
+<p align="center">
+  <img src="readme_files/trainloss_valloss.png" width="" height=""/>
+</p>
+
+
