@@ -102,7 +102,7 @@ During operation, the decoder adds the newly generated output to its existing in
 The training loss (red line) vs. validation loss (blue line) we can see are extremely similar graphs, however, the validation loss, in general, is smaller than the training loss, thus we are slightly underfitting. We will attempt to solve this by adding and training on more extensive data sets.
 
 <p align="center">
-  <img src="readme_files/trainloss_valloss.png" width="" height=""/>
+  <img src="readme_files/trainloss_valloss_graph.png" width="" height=""/>
 </p>
 
 
