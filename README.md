@@ -97,6 +97,16 @@ During operation, the decoder adds the newly generated output to its existing in
 <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> (Andrej Karpathy), <a href="https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"><i>Attention Is All You Need</i></a>, <a href="https://www.gutenberg.org/"><i>Project Gutenberg</i></a>
 
 
-## Model Training Process
+## Model Training Analysis
 
-[loss vs. epoch graph] <-- to be added soon.
+#### 2/21/25
+
+To Normalize the training loss and validation loss, we averaged the values [(trainloss + valloss) / 2] to get a loss graph, which follows a typical and expected loss curve. There is a rapid drop, which is expected because the model is learning the basic patterns in the data. At t = ~1000, we see a noticeable increase in the flattening of the curve (especially compared to t = ~500), this could mean that the model is beginning to converge. At t = ~1500 to 2800 iterations, the loss stabilizes quite significantly, which possibly indicates diminishing returns of the training and the model is near convergence. To fix this, we plan on training on a new dataset and tweak the hyperparameters.  
+
+<p align="center">
+  <img src="readme_files/trainloss_valloss_graph.png" width="" height=""/>
+</p>
+
+
+
+
