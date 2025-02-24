@@ -4,6 +4,13 @@
 #include <string>
 #include <map>
 
+/**
+ * run from root project dir
+ * 
+ * g++ character/main.cpp -o a.out
+ * ./a.out <Language>/<Data Set Name>.txt
+*/
+
 int countChar(const std::string& filePath, const std::string& outputFile) {
     std::ifstream input(filePath);
     std::ofstream output(outputFile);
@@ -40,7 +47,7 @@ int main(int argc, char* argv[]) {
         std::cerr << "Only submit one file" << std::endl;
         return 1; 
     }
-    std::string outputFile = "output.txt";
+    std::string outputFile = "character/output/output.csv";
 
     return countChar(argv[1], outputFile);
 }
