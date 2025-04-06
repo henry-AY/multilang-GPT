@@ -1,5 +1,5 @@
 import os
-
+import csv
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
@@ -18,7 +18,7 @@ dropout = 0.2 # 20% of all intermediate calculations are dropped to 0
 
 torch.manual_seed(1)
 
-with open('English/WarAndPeace.txt', 'r', encoding='utf-8') as f:
+with open('English/HarryPotter.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 chars = sorted(list(set(text)))
@@ -219,8 +219,21 @@ def main():
     user_epochs = int(input(f"Current epoch is {start_epoch}. How many more epochs do you want to train?"))
     num_epochs = start_epoch + user_epochs  # Compute total epochs
 
+    csvfile = open("training_log.csv", "w", newline='') #open outside of with statement
+    fieldnames = ['step', 'train_loss', 'val_loss']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+
     for epoch in range(start_epoch, num_epochs):
         for iter in range(max_iters):
+            if iter % eval_interval == 0:
+                losses = estimate_loss()
+                print(f"step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")  # Write to console
+                writer.writerow({
+                    'step': iter,
+                    'train_loss': losses['train'].item(),
+                    'val_loss': losses['val'].item()
+                })  # Write to CSV
             #sample a batch of data
             xb, yb = get_batch('train')
 
