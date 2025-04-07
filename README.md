@@ -108,5 +108,17 @@ To Normalize the training loss and validation loss, we averaged the values [(tra
 </p>
 
 
+#### 4/6/25
+
+In this 20-epoch training of our model, we initially observe a high training and validation loss at the first step, which is typical as the model begins without prior learning. A rapid decline in loss follows immediately as the model quickly learns fundamental patterns in the data. For the majority of the training period, the training and validation losses closely track each other, indicating consistent learning.
+
+However, at later epochs, around step 15,000, the validation loss stops decreasing and becomes stagnant while the training loss continues a gradual decline. This emerging gap between training and validation performance suggests the model is beginning to learn training data specifics rather than generalizable patterns, which is indicative of early-stage overfitting.
+
+Therefore, while the model exhibits only mild overfitting tendencies towards the end of training, this warrants exploring techniques such as regularization, early stopping, or learning rate scheduling to enhance the performance of the model.
+
+<p align="center">
+  <img src="readme_files/trainloss_valloss_graph_20EPOCH.png" width="" height=""/>
+</p>
+
 
 

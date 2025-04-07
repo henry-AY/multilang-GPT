@@ -6,7 +6,7 @@ from train import BigramLanguageModel
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-with open('English/WarAndPeace.txt', 'r', encoding='utf-8') as f:
+with open('English/HarryPotter.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 """ REPLACE WITH SINGLE SEED FOR REPEATABLE RESULTS"""
