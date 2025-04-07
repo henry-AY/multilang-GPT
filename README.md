@@ -117,7 +117,7 @@ However, at later epochs, around step 15,000, the validation loss stops decreasi
 Therefore, while the model exhibits only mild overfitting tendencies towards the end of training, this warrants exploring techniques such as regularization, early stopping, or learning rate scheduling to enhance the performance of the model.
 
 <p align="center">
-  <img src="readme_files/trainloss_valloss_graph_20EPOCH.png" width="" height=""/>
+  <img src="readme_files/train_loss and val_loss_20EPOCH.png" width="" height=""/>
 </p>
 
 
