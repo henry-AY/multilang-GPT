@@ -2,7 +2,7 @@ import random
 import sys
 import torch
 import torch.nn as nn
-from train import BigramLanguageModel
+from src.train import BigramLanguageModel
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
