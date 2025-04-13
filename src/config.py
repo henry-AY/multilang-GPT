@@ -3,7 +3,7 @@
 import torch.nn
 
 #hyperparams
-batch_size = 32 # how many independent sequences will we process in parallel?
+batch_size = 32 #how many independent sequences will be processed in parallel
 block_size = 8 # what is the maxmimum context length for predictions
 n_embd = 384
 n_head = 6
