@@ -9,3 +9,7 @@ print(data.tail())
 print(data.describe())
 data.hist(figsize=(25, 20))
 np.show()
+
+correl = data.drop(column='status').corr()
+np.figure(figsize=(20,20))
+
