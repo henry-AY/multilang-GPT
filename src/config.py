@@ -1,4 +1,9 @@
 import torch.nn
+from pathlib import Path
+
+#data path
+BASE_DIR = Path(__file__).resolve().parent
+data = BASE_DIR.parent / 'data' / 'English' / 'The_Prince.txt'
 
 #hyperparams
 batch_size = 32 # How many independent sequences will be processed in parallel
