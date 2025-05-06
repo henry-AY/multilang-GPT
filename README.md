@@ -1,8 +1,11 @@
-# LLM-multilang-GPT
+# MultilangGPT
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/)
 
 > Author(s): Henry Yost (henry-AY), Jessy Garcia (jgarc826), Dmitry Sorokin (Dekamayaro)
 
-A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the <a href="https://pytorch.org/docs/stable/nn.html"><ins>PyTorch.nn</a> (Neural network) library</ins> which houses transformer architecture. The goal of multilangGPT is to output linguistic text similar to humans' capabilities. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forward to other languages. The majority and basis of the architecture come from Andrej Karpathy's <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> GitHub repo, however, all analyses, and text files are independent and licensed uniquely.
+A <ins>Generative Pre-trained Transformer</ins> (GPT) is a type of artificial intelligence that understands and generates human-like text. We will be using the <a href="https://pytorch.org/docs/stable/nn.html"><ins>PyTorch.nn</a> (Neural network) library</ins> which houses transformer architecture. The goal of multilangGPT is to output linguistic text similar to humans' capabilities. Ultimately, we want the model to produce undifferentiable text (compared to a human). The model will have a range of languages, initially starting with English, and then moving forward to other languages. The majority and basis of the architecture come from Andrej Karpathy's <a href="https://github.com/karpathy/nanoGPT">nanoGPT</a> GitHub repo, however, all analyses and text files are independent and licensed uniquely.
 
 ## Transformer Architecture used in multilangGPT
 <p align="center">
@@ -20,27 +23,35 @@ The figure below (the left half of the transformer) is the Encoder.
 
 #### Step 1 - Input Embeddings
 
-It is important to note that the embedding process only happens in the bottom-most encoder, not each encoder. The encoder begins by converting the input into tokens--words, subwords, or characters--into vectors using embedding layers. The embeddings > capture the semantic meaning of the tokens and convert them into numerical vectors.
+It is important to note that the embedding process only happens in the bottom-most encoder, not each encoder. The encoder begins by converting the input into tokens--words, subwords, or characters--into vectors using embedding layers. The embeddings capture the semantic meaning of the tokens and convert them into numerical vectors.
+
+<details>
+<summary>Input Embeddings Exammple (Click to expand) </summary>
+<hr>
+
+> Finish
+
+<hr>
+</details>
 
 #### Step 2 - Positional Encoding
 
-Because Transformers lack a recurrence mechanism such as Recurrent Neural Networks (RNNs), a mathematical approach must be applied to introduce position-specific patterns to each token in a sequence. This process is called 'Positional Encoding', where a combination of sine and cosine functions are used to create a positional vector.
+Because Transformers lack a recurrence mechanism such as Recurrent Neural Networks (RNNs), a mathematical approach must be applied to introduce position-specific patterns to each token in a sequence. This process is called 'Positional Encoding', where a combination of sine and cosine functions creates a positional vector.
 
-##### <ins>Positional Encoding using Sine</ins>
-$\ PE(\text{pos}, 2i) = \sin \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
+<details>
+<summary>Math Behind Positional Encoding (Click to expand) </summary>
+<hr>
 
-```
-PE\left(pos,\ 2i\right)\ =\sin\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
-```
+  ##### <b>Positional Encoding using Sine</b>
+  $\ PE(\text{pos}, 2i) = \sin \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
 
-##### <ins>Positional Encoding using Cosine</ins>
-$\ PE(\text{pos}, 2i + 1) = \cos \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
+  ##### <b>Positional Encoding using Cosine</b>
+  $\ PE(\text{pos}, 2i + 1) = \cos \left( \frac{\text{pos}}{10000 \cdot \left( \frac{2i}{d_{\text{model}}} \right)} \right) \$
 
-```
-PE\left(pos,\ 2i\ +\ 1\right)\ =\cos\left(\frac{pos}{10000\left(\frac{2i}{d_{model}}\right)}\right)
-```
+As mentioned above, the following functions allow the model to encode sequence order without recurrence. The sine function is used for even dimensions of the embedding vector, while the cosine for odd dimensions.
 
-The equations and process of positional encoding will be further detailed and explored in <i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i>.
+<hr>
+</details>
 
 #### Step 3 - Multi-Headed Self-Attention
 
@@ -51,7 +62,18 @@ This mechanism allows the encoder to concentrate on various parts of the input s
 * <b>Key:</b> A vector in the attention mechanism that corresponds to each token in the input sequence.
 * <b>Value:</b> Each value is associated with a given key, and where value where the query and key have the highest attention score is the final output.
 
-<i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i> will provide a significantly more detailed cover of the self-attention mechanism.
+<details>
+<summary>Derivation of Scaled Dot-Product Attention (Click to expand) </summary>
+<hr>
+
+Scaled dot-product attention is the attention mechanism used in transformers. The dot products are scaled down by $\sqrt{d_k}$. As mentioned above, Q represents the query, K represents a key, and V is a value. We are able to calculate the attention using the following formula:
+
+$\ \text{Attention}(Q, K, V) = \text{Softmax}\left(\dfrac{QK^{T}}{\sqrt{d_k}}\right) \$
+
+Assuming that d and k are $d_k$-dimensional vectors of independent random variables with a mean of 0 and a variance of 1, then the dot product of $d \cdot k$ has a mean of 0 and a variance of $d_k$. However, we prefer a variance of 1, therefore, we divide by $\sqrt{d_k}$.
+
+<hr>
+</details>
 
 #### Step 4 - Output of the Encoder
 
@@ -64,7 +86,7 @@ The figure below (the right half of the transformer) is the Decoder
   <img src="readme_files/Decoder_Transformer.png" width="200" height="675"/>
 </p>
 
-The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and softmax function to determine word probabilities.
+The decoder in a Transformer model is responsible for generating text sequences and consists of sub-layers similar to the encoder, including two multi-headed attention layers, a pointwise feed-forward layer, residual connections, and layer normalization. Each multi-headed attention layer has a distinct function, and the decoding process concludes with a linear layer and a softmax function to determine word probabilities.
 
 Operating in an autoregressive manner, the decoder begins with a start token and utilizes previously generated outputs along with rich contextual information from the encoder. This decoding process continues until it produces a token that signifies the end of output generation.
 
@@ -101,7 +123,7 @@ During operation, the decoder adds the newly generated output to its existing in
 
 #### 2/21/25
 
-To Normalize the training loss and validation loss, we averaged the values [(trainloss + valloss) / 2] to get a loss graph, which follows a typical and expected loss curve. There is a rapid drop, which is expected because the model is learning the basic patterns in the data. At t = ~1000, we see a noticeable increase in the flattening of the curve (especially compared to t = ~500), this could mean that the model is beginning to converge. At t = ~1500 to 2800 iterations, the loss stabilizes quite significantly, which possibly indicates diminishing returns of the training and the model is near convergence. To fix this, we plan on training on a new dataset and tweak the hyperparameters.  
+To normalize the training loss and validation loss, we averaged the values [(trainloss + valloss) / 2] to get a loss graph, which follows a typical and expected loss curve. There is a rapid drop, which is expected because the model is learning the basic patterns in the data. At t = ~1000, we see a noticeable increase in the flattening of the curve (especially compared to t = ~500). This could mean that the model is beginning to converge. At t = ~1500 to 2800 iterations, the loss stabilizes quite significantly, which possibly indicates diminishing returns of the training, and the model is near convergence. To fix this, we plan on training on a new dataset and tweak the hyperparameters.  
 
 <p align="center">
   <img src="readme_files/trainloss_valloss_graph.png" width="" height=""/>
@@ -119,6 +141,3 @@ Therefore, while the model exhibits only mild overfitting tendencies towards the
 <p align="center">
   <img src="readme_files/train_loss and val_loss_20EPOCH.png" width="" height=""/>
 </p>
-
-
-

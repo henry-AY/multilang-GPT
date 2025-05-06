@@ -6,4 +6,7 @@
 # To be stored locally (can be removed from .gitignore after significant polishing and training)
 trainloss_and_valloss.csv
 output.txt
-.vscode
+
+# To be stored locally
+__pycache__/
+.vscode/
