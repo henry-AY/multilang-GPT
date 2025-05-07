@@ -26,7 +26,7 @@ The figure below (the left half of the transformer) is the Encoder.
 It is important to note that the embedding process only happens in the bottom-most encoder, not each encoder. The encoder begins by converting the input into tokens--words, subwords, or characters--into vectors using embedding layers. The embeddings capture the semantic meaning of the tokens and convert them into numerical vectors.
 
 <details>
-<summary>Input Embeddings Exammple (Click to expand) </summary>
+<summary>Input Embeddings Example (Click to expand) </summary>
 <hr>
 
 > Finish
