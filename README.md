@@ -106,8 +106,6 @@ This process resembles the self-attention mechanism in the encoder, but with an 
   <img src="readme_files/Masked_Scores.png" width="650" height="200"/>
 </p>
 
-The steps of the Linear Classifier and Softmax will be covered significantly more in-depth in <i>Fundamentals of multilang-GPT - A Deep-Dive into a Transformer-Based Language Model</i>
-
 #### Step 4 - Output of the Decoder
 
 The output from the final layer is converted into a predicted sequence using a linear layer followed by a softmax function to produce probabilities for each word in the vocabulary.
