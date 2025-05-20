@@ -25,6 +25,10 @@ decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integ
 state_dict = config.BASE_DIR.parent / 'model' / 'final_model_weights.pth'
 
 model = BigramLanguageModel(vocab_size).to(config.device)
+
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
 model.load_state_dict(torch.load(state_dict, weights_only=True))
 model.eval()
 
@@ -44,6 +48,7 @@ output = generate_token("The Prince", max_tokens=500)
 #print GPT, and license
 print('jh-GPT: Mit license\nAuthors: henry-Ay, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
 print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
+print(f'Total model parameters: {count_parameters(model):,}\n')
 
 output_path = config.BASE_DIR.parent / 'output' / 'text_logs' / 'output.txt'
 f = open(output_path, 'a')
