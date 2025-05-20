@@ -1,5 +1,4 @@
-# Ignore all .pth files
-*.pth
+# .pth files are stored using LFS
 # Ignore all .out executables
 *.out
 

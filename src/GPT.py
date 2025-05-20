@@ -10,7 +10,7 @@ from pathlib import Path
 with open(config.data, 'r', encoding='utf-8') as f:
     text = f.read()
 
-""" REPLACE WITH SINGLE SEED FOR REPEATABLE RESULTS"""
+""" REPLACE WITH SINGLE SEED FOR REPEATABLE RESULTS """
 random_seed = random.randint(0, sys.maxsize - 1)
 torch.manual_seed(random_seed)
 
@@ -46,7 +46,7 @@ def generate_token(token, max_tokens):
 output = generate_token("The Prince", max_tokens=500)
 
 #print GPT, and license
-print('jh-GPT: Mit license\nAuthors: henry-Ay, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
+print('jh-GPT: Mit license\nAuthors: henry-AY, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
 print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
 print(f'Total model parameters: {count_parameters(model):,}\n')
 
