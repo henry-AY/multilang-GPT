@@ -26,9 +26,6 @@ state_dict = config.BASE_DIR.parent / 'model' / 'final_model_weights.pth'
 
 model = BigramLanguageModel(vocab_size).to(config.device)
 
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters())
-
 model.load_state_dict(torch.load(state_dict, weights_only=True))
 model.eval()
 
@@ -45,9 +42,12 @@ def generate_token(token, max_tokens):
 
 output = generate_token("The Prince", max_tokens=500)
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
 #print GPT, and license
 print('jh-GPT: Mit license\nAuthors: henry-AY, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
-print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
+print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}')
 print(f'Total model parameters: {count_parameters(model):,}\n')
 
 output_path = config.BASE_DIR.parent / 'output' / 'text_logs' / 'output.txt'

@@ -27,10 +27,12 @@ eval_interval = 200 # Number of iterations between each model evaluation and log
 eval_iters = 200 # Number of iterations used to estimate evaluation loss (averaged over this many steps)
 
 if torch.cuda.is_available(): # use nvidia cuda if available
+    print("CUDA Available:", torch.cuda.is_available())
+    print("CUDA Built:", torch.cuda.is_built())  
     device = torch.device("cuda")
-    print("cuda\n")
-elif torch.backends.mps.is_available():
+elif torch.backends.mps.is_available(): # If mac, use MPS
+    print("MPS Available:", torch.backends.mps.is_available())
     device = torch.device("mps")
-    print("mps\n")
-else:
+else: # otherwise CPU
+    print("CPU Available:", torch.cpu.is_available())
     device = torch.device("cpu")
