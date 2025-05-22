@@ -3,7 +3,7 @@ from pathlib import Path
 
 #data path
 BASE_DIR = Path(__file__).resolve().parent
-data = BASE_DIR.parent / 'data' / 'English' / 'The_Prince.txt'
+data = BASE_DIR.parent / 'data' / 'English' / 'english.txt'
 
 #hyperparams
 batch_size = 32 # How many independent sequences will be processed in parallel
@@ -11,9 +11,12 @@ block_size = 8 # What is the maxmimum context length for predictions
 
 
 #transformer params
-n_embd = 384 # Dimensionality of the embedding vectors and hidden states
-n_head = 6 # Number of attention heads in each multi-head attention layer
-n_layer = 6 # Number of transformer blocks (i.e., layers) in the model
+# Was 384
+n_embd = 768 # Dimensionality of the embedding vectors and hidden states
+# Was 6
+n_head = 12 # Number of attention heads in each multi-head attention layer
+# Was 6
+n_layer = 12 # Number of transformer blocks (i.e., layers) in the model
 dropout = 0.2 # Dropout rate (20%) applied to intermediate layers to reduce overfitting
 
 #optimization params
@@ -23,4 +26,13 @@ max_iters = 1000 # Total number of training iterations (batches processed)
 eval_interval = 200 # Number of iterations between each model evaluation and logging
 eval_iters = 200 # Number of iterations used to estimate evaluation loss (averaged over this many steps)
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu' # Use NVIDIA Cuda if available
+if torch.cuda.is_available(): # use nvidia cuda if available
+    print("CUDA Available:", torch.cuda.is_available())
+    print("CUDA Built:", torch.cuda.is_built())  
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available(): # If mac, use MPS
+    print("MPS Available:", torch.backends.mps.is_available())
+    device = torch.device("mps")
+else: # otherwise CPU
+    print("CPU Available:", torch.cpu.is_available())
+    device = torch.device("cpu")

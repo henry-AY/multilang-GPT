@@ -10,7 +10,7 @@ from pathlib import Path
 with open(config.data, 'r', encoding='utf-8') as f:
     text = f.read()
 
-""" REPLACE WITH SINGLE SEED FOR REPEATABLE RESULTS"""
+""" REPLACE WITH SINGLE SEED FOR REPEATABLE RESULTS """
 random_seed = random.randint(0, sys.maxsize - 1)
 torch.manual_seed(random_seed)
 
@@ -25,6 +25,7 @@ decode = lambda l: ''.join([itos[i] for i in l]) # decoder: take a list of integ
 state_dict = config.BASE_DIR.parent / 'model' / 'final_model_weights.pth'
 
 model = BigramLanguageModel(vocab_size).to(config.device)
+
 model.load_state_dict(torch.load(state_dict, weights_only=True))
 model.eval()
 
@@ -41,9 +42,13 @@ def generate_token(token, max_tokens):
 
 output = generate_token("The Prince", max_tokens=500)
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
 #print GPT, and license
-print('jh-GPT: Mit license\nAuthors: henry-Ay, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
-print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}\n')
+print('jh-GPT: Mit license\nAuthors: henry-AY, jgarc826\nhttps://github.com/henry-AY/multilang-GPT')
+print(f'\nRandom seed set to: {random_seed}\nEpoch: {curr_epoch}')
+print(f'Total model parameters: {count_parameters(model):,}\n')
 
 output_path = config.BASE_DIR.parent / 'output' / 'text_logs' / 'output.txt'
 f = open(output_path, 'a')
